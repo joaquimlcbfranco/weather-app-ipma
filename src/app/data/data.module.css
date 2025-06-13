@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 .dataWrapper {
 	height: 70%;
@@ -24,7 +24,27 @@
 
 .topInfo {
 	margin: 1em;
-margin-bottom: auto;
+	margin-bottom: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.topInfo a {
+	text-decoration: none;
+	position: absolute;
+	left: 0;
+	margin-left: 2em;
+	transition: scale 0.35s ease-in-out;
+}
+
+.topInfo a:hover {
+	scale: 1.05;
+}
+
+.topInfo a:active {
+	scale: 0.9;
 }
 
 .weatherForm .formRow {
@@ -38,7 +58,7 @@ margin-bottom: auto;
 	outline: rgb(255, 255, 255);
 	color: rgba(255, 255, 255, 0.7);
 	background-color: rgba(255, 255, 255, 0.2);
-	padding: 0.5em 1em;
+	padding: 0.7em 1em;
 	font-size: 1rem;
 	font-weight: bold;
 	border-radius: 1em;
@@ -52,7 +72,7 @@ margin-bottom: auto;
 }
 
 .weatherForm input::placeholder {
-	color: rgba(255, 255, 255, 0.7);
+	color: rgba(255, 255, 255, 1);
 	transition: color 0.35s ease-in-out;
 }
 
@@ -68,38 +88,55 @@ margin-bottom: auto;
 }
 
 .submitForm svg {
-	transition: fill 0.35s ease-in-out;
+	margin-right: 0.3em;
+	transition: fill 0.35s ease-in-out, scale 0.35s ease-in-out;
+	cursor: pointer;
 }
 
 .submitForm svg:hover {
 	fill: rgba(255, 255, 255, 0.9);
+	scale: 1.05;
+}
+
+.submitForm svg:active {
+	scale: 0.9;
 }
 
 .dataSection {
 	flex: 1;
 	align-items: center;
 	display: flex;
-	border: 1px solid red;
 	width: 100%;
 	justify-content: space-between;
 	padding: 2em;
 }
 
-.weatherDescription {
+.leftData {
 	max-width: 500px;
 }
 
-.weatherDescription h1:first-child {
+.leftData h1:first-child {
 	color: rgba(255, 255, 255, 0.9);
 	font-weight: bold;
-	font-size: 2.5 rem;
-	text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+	font-size: 2.5rem;
+	text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+	font-family: "Fira Sans";
 }
-.weatherDescription h1:nth-child(2) {
+
+.leftData p {
+	color: rgb(255, 255, 255, 0.9);
+	font-weight: 400;
+	font-size: 1.2rem;
+	text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+	font-family: "Fira Sans";
+}
+
+.leftData .weatherDescription {
 	color: rgba(255, 255, 255, 0.75);
 	font-weight: 300;
 	font-size: 2.8rem;
-	text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+	text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+	font-family: "Fira Sans";
 }
 
 .rightData {
@@ -108,23 +145,22 @@ margin-bottom: auto;
 	grid-template-rows: 100px 100px;
 	align-items: center;
 	justify-items: center;
-	margin-right: 2em;
+	margin-top: 1em;
 }
 
 .rightData p {
 	color: white;
-	font-size: 2rem;
+	font-size: 2.1rem;
 	font-weight: 300;
 	font-family: "Fira Sans", "Nunito", sans-serif, system-ui;
-	
 }
 
 .rightData .square {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 70%;
-	width: 70%;
+	height: 90%;
+	width: 90%;
 	position: relative;
 }
 
@@ -132,15 +168,40 @@ margin-bottom: auto;
 	position: absolute;
 	top: 0;
 	left: 0;
-	font-size: 0.75rem;
+	font-weight: 500;
+	font-size: 0.9rem;
+}
+
+.square > p > .minTemp {
+	color: rgb(160, 222, 255);
+}
+
+.square > p > .maxTemp {
+	color: rgb(255, 213, 0);
 }
 
 .square > p > .measurement {
 	font-size: 1rem;
-	font-weight: 200;
+	font-weight: 300;
 }
 
 .square > p > .degrees {
-	font-size: inherit;
+	font-size: 2rem;
 	font-weight: 200;
+}
+
+.bottomData .cards {
+	display: flex;
+	gap: 1em;
+	padding: 1em;
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
 }
