@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  padding: 1em 1.5em;
+  border-radius: 1em;
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px rgb(0, 0, 0, 0.3);
+  transition: 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 0 10px rgba(252, 213, 97, 0.7);
+}
+
+.card .day {
+  font-family: "Nunito", sans-serif, system-ui;
+}
+
+.card .temperatures {
+  display: flex;
+  gap: 1em;
+}
