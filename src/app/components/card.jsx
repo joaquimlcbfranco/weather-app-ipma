@@ -1,12 +1,13 @@
 import styles from "./card.module.css";
+import { format } from "date-fns";
 
-const Card = () => {
+const Card = ({ data }) => {
 	return (
 		<div className={styles.card}>
-			<h2 className={styles.day}>14/06</h2>
+			<h2 className={styles.day}>{format(data.forecastDate, "dd'/'MM")}</h2>
 			<div className={styles.temperatures}>
-				<p>14°</p>
-				<p>23°</p>
+				<p>{data.tMin}</p>
+				<p>{data.tMax}</p>
 			</div>
 		</div>
 	);
