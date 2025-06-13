@@ -6,34 +6,55 @@ import Card from "../components/card.jsx";
 import { useState, useEffect } from "react";
 
 const Data = () => {
-	const [text, setText] = useState("Faro");
+	const [text, setText] = useState("");
 	const [data, setData] = useState([]);
+	const [descriptions, setDescriptions] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
 	const handleInputChange = (e) => {
 		setText(e.target.value);
-	}
+	};
 
+	const handleFormSubmit = async (e) => {
+		e.preventDefault();
+
+		try {
+			const fetchedData = await fetch(
+				"https://api.ipma.pt/open-data/distrits-islands.json"
+			);
+			const json = await fetchedData.json();
+			console.log(json);
+		} catch (err) {
+			setError(err);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	// Get initial data for the city of Faro
 	useEffect(() => {
-		const fetchData = async () => {
+		const fetchInitialData = async () => {
 			try {
-				const fetchedData = await fetch("https://api.ipma.pt/open-data/distrits-islands.json");
-				const json = await fetchedData.json();
-				console.log(json);
-			}
-			catch (err) {
-				setError(err);
-			}
-			finally {
+				const faroData = await fetch(
+					"https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/1080500.json"
+				);
+				if (faroData.response >= 400) {
+					setError(
+						"There has been an error while getting the requested data. Status: ",
+						faroData.response
+					);
+				}
+				const jsonTemps = await faroData.json();
+				setData(jsonTemps.data);
+				setText("");
+			} catch (err) {
+				setError("Unexpected error. Status: ", err);
+			} finally {
 				setLoading(false);
 			}
-			
-		}
-
-		fetchData();
+		};
 	}, []);
-
 
 	return (
 		<div className={styles.dataWrapper}>
@@ -49,7 +70,10 @@ const Data = () => {
 						<path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
 					</svg>
 				</Link>
-				<form className={styles.weatherForm}>
+				<form
+					className={styles.weatherForm}
+					onSubmit={handleFormSubmit}
+				>
 					<div className={styles.formRow}>
 						<input
 							id="city"
