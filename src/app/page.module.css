@@ -29,21 +29,21 @@
 
 .welcomeWrapper h1 {
 	color: white;
-	font-size: 2.5rem;
-	font-weight: 700;
+	font-size: 3rem;
+	font-weight: 300;
 	font-family: "Nunito", "Fira Sans";
 	text-transform: uppercase;
 	text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .welcomeWrapper h1:nth-child(3) {
-	color: rgb(131, 204, 255);
+	color: rgb(252, 213, 97);
 }
 
 .welcomeWrapper a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin-top: 1.5em;
 	color: white;
 	width: 190px;
@@ -51,16 +51,16 @@
 	border-radius: 1.5em;
 	background-image: linear-gradient(
 		89.5deg,
-		rgba(131, 204, 255, 1) 0.4%,
-		rgba(66, 144, 251, 1) 100.3%
+		rgb(246, 185, 55) 0.4%,
+		rgb(252, 213, 97) 100.3%
 	);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	border: none;
 	font-family: "Nunito", "Fira Sans", sans-serif, system-ui;
+	font-weight: bold;
 	cursor: pointer;
 	transition: 0.35s ease-in-out;
-  text-decoration: none;
-
+	text-decoration: none;
 }
 
 .welcomeWrapper a:hover {
