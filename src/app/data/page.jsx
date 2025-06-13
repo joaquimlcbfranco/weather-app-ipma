@@ -1,11 +1,24 @@
 "use client";
 
+import Link from "next/link";
 import styles from "./data.module.css";
+import Card from "../components/card.jsx";
 
 const Data = () => {
 	return (
 		<div className={styles.dataWrapper}>
 			<div className={styles.topInfo}>
+				<Link href="/">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="24px"
+						viewBox="0 -960 960 960"
+						width="24px"
+						fill="#FFFFFF"
+					>
+						<path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
+					</svg>
+				</Link>
 				<form className={styles.weatherForm}>
 					<div className={styles.formRow}>
 						<input
@@ -28,21 +41,32 @@ const Data = () => {
 				</form>
 			</div>
 			<div className={styles.dataSection}>
-				<div className={styles.weatherDescription}>
+				<div className={styles.leftData}>
 					<h1>Évora, Portugal</h1>
-					<h1>Céu parcialmente nublado e chuva</h1>
+					<p>Sexta, 13 de junho</p>
+					<h1 className={styles.weatherDescription}>
+						Céu parcialmente nublado e chuva
+					</h1>
 				</div>
 				<div className={styles.rightData}>
 					<div className={styles.square}>
 						<p>
-							<span>MIN</span>21
-							<span className={`${styles.measurement} ${styles.degrees}`}>°</span>
+							<span className={styles.minTemp}>MÍN</span>21
+							<span
+								className={`${styles.measurement} ${styles.degrees}`}
+							>
+								°
+							</span>
 						</p>
 					</div>
 					<div className={styles.square}>
 						<p>
-							<span>MAX</span>14
-							<span className={`${styles.measurement} ${styles.degrees}`}>°</span>
+							<span className={styles.maxTemp}>MÁX</span>14
+							<span
+								className={`${styles.measurement} ${styles.degrees}`}
+							>
+								°
+							</span>
 						</p>
 					</div>
 					<div className={styles.square}>
@@ -59,8 +83,13 @@ const Data = () => {
 					</div>
 				</div>
 			</div>
-			<div className={styles.bottomSection}>
-				<div className={styles.cards}></div>
+			<div className={styles.bottomData}>
+				<div className={styles.cards}>
+					<Card />
+					<Card />
+					<Card />
+					<Card />
+				</div>
 			</div>
 		</div>
 	);
