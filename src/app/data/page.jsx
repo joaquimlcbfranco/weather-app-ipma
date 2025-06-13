@@ -3,8 +3,38 @@
 import Link from "next/link";
 import styles from "./data.module.css";
 import Card from "../components/card.jsx";
+import { useState, useEffect } from "react";
 
 const Data = () => {
+	const [text, setText] = useState("Faro");
+	const [data, setData] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+
+	const handleInputChange = (e) => {
+		setText(e.target.value);
+	}
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const fetchedData = await fetch("https://api.ipma.pt/open-data/distrits-islands.json");
+				const json = await fetchedData.json();
+				console.log(json);
+			}
+			catch (err) {
+				setError(err);
+			}
+			finally {
+				setLoading(false);
+			}
+			
+		}
+
+		fetchData();
+	}, []);
+
+
 	return (
 		<div className={styles.dataWrapper}>
 			<div className={styles.topInfo}>
@@ -25,6 +55,8 @@ const Data = () => {
 							id="city"
 							placeholder="Cidade"
 							type="text"
+							value={text}
+							onChange={handleInputChange}
 						></input>
 						<button type="submit" className={styles.submitForm}>
 							<svg
