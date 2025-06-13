@@ -13,7 +13,7 @@
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	background-color: rgba(255, 255, 255, 0.2);
 	backdrop-filter: blur(8px);
-	font-family: "Fira Sans", "Playfair Display", sans-serif, system-ui;
+	font-family: "Fira Sans", "Nunito", sans-serif, system-ui;
 	animation: fade-in 0.6s;
 }
 
@@ -24,7 +24,7 @@
 .welcomeWrapper img {
 	margin-bottom: 2em;
 	filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
-	-webkit-filter: drop-shadow(5px 5px 5px #222);
+	-webkit-filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
 }
 
 .welcomeWrapper h1 {
@@ -40,7 +40,10 @@
 	color: rgb(131, 204, 255);
 }
 
-.welcomeWrapper button {
+.welcomeWrapper a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 	margin-top: 1.5em;
 	color: white;
 	width: 190px;
@@ -53,18 +56,20 @@
 	);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	border: none;
-	font-family: "Nunito", sans-serif, system-ui;
+	font-family: "Nunito", "Fira Sans", sans-serif, system-ui;
 	cursor: pointer;
 	transition: 0.35s ease-in-out;
+  text-decoration: none;
+
 }
 
-.welcomeWrapper button:hover {
+.welcomeWrapper a:hover {
 	border-radius: 1em;
 	scale: 1.03;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
-.welcomeWrapper button:active {
+.welcomeWrapper a:active {
 	color: rgba(255, 255, 255, 0.5);
 	scale: 0.9;
 }
