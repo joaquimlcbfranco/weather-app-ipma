@@ -64,22 +64,21 @@
 	font-weight: bold;
 	border-radius: 1em;
 	position: relative;
-	transition: color 0.35s ease-in-out, box-shadow 0.2s ease-in-out;
+	transition: color 0.35s ease-in-out, box-shadow 0.1s ease-in-out;
 }
 
 .weatherForm input:hover,
 .weatherForm input:focus {
-	color: rgba(255, 255, 255, 1);
 	box-shadow: 0 0 10px rgba(252, 213, 97, 0.7);
+}
+
+.weatherForm input:not(:placeholder-shown) {
+	color: rgba(255, 255, 255, 1);
 }
 
 .weatherForm input::placeholder {
 	color: rgba(255, 255, 255, 0.6);
 	transition: color 0.35s ease-in-out;
-}
-
-.weatherForm input:hover::placeholder {
-	color: rgba(255, 255, 255, 1);
 }
 
 .weatherForm .submitForm {
@@ -90,7 +89,7 @@
 }
 
 .submitForm svg {
-	margin-right: 0.3em;
+	margin-right: 0.5em;
 	transition: fill 0.35s ease-in-out, scale 0.35s ease-in-out;
 	cursor: pointer;
 }
@@ -152,7 +151,7 @@
 
 .rightData p {
 	color: white;
-	font-size: 2.1rem;
+	font-size: 2.8rem;
 	font-weight: 300;
 	font-family: "Fira Sans", "Nunito", sans-serif, system-ui;
 }
@@ -171,7 +170,7 @@
 	top: 0;
 	left: 0;
 	font-weight: 500;
-	font-size: 0.9rem;
+	font-size: 1rem;
 }
 
 .square > p > .minTemp {
@@ -183,12 +182,12 @@
 }
 
 .square > p > .measurement {
-	font-size: 1rem;
+	font-size: 1.1rem;
 	font-weight: 300;
 }
 
 .square > p > .degrees {
-	font-size: 2rem;
+	font-size: 2.1rem;
 	font-weight: 200;
 }
 
