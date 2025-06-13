@@ -12,6 +12,7 @@
 	justify-content: center;
 	border-radius: 1em;
 	border: 1px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 0 10px rgb(0, 0, 0, 0.5);
 	background-color: rgba(255, 255, 255, 0.1);
 	backdrop-filter: blur(8px);
 	font-family: "Nunito", "Fira Sans", sans-serif, system-ui;
@@ -54,25 +55,26 @@
 }
 
 .weatherForm input {
-	border: none;
+	border: 1px solid rgba(255, 255, 255, 0.2);
 	outline: rgb(255, 255, 255);
-	color: rgba(255, 255, 255, 0.7);
-	background-color: rgba(255, 255, 255, 0.2);
+	color: rgba(255, 255, 255, 0.6);
+	background-color: rgba(0, 0, 0, 0.2);
 	padding: 0.7em 1em;
 	font-size: 1rem;
 	font-weight: bold;
 	border-radius: 1em;
 	position: relative;
-	transition: color 0.35s ease-in-out;
+	transition: color 0.35s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.weatherForm input:active,
-.weatherForm input:hover {
+.weatherForm input:hover,
+.weatherForm input:focus {
 	color: rgba(255, 255, 255, 1);
+	box-shadow: 0 0 10px rgba(252, 213, 97, 0.7);
 }
 
 .weatherForm input::placeholder {
-	color: rgba(255, 255, 255, 1);
+	color: rgba(255, 255, 255, 0.6);
 	transition: color 0.35s ease-in-out;
 }
 
@@ -116,10 +118,10 @@
 }
 
 .leftData h1:first-child {
-	color: rgba(255, 255, 255, 0.9);
+	color: rgba(242, 243, 244, 0.95);
 	font-weight: bold;
-	font-size: 2.5rem;
-	text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+	font-size: 2rem;
+	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 	font-family: "Fira Sans";
 }
 
@@ -127,15 +129,15 @@
 	color: rgb(255, 255, 255, 0.9);
 	font-weight: 400;
 	font-size: 1.2rem;
-	text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 	font-family: "Fira Sans";
 }
 
 .leftData .weatherDescription {
-	color: rgba(255, 255, 255, 0.75);
+	color: rgba(255, 255, 255, 1);
 	font-weight: 300;
 	font-size: 2.8rem;
-	text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+	text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
 	font-family: "Fira Sans";
 }
 
@@ -192,8 +194,9 @@
 
 .bottomData .cards {
 	display: flex;
-	gap: 1em;
+	gap: 1.5em;
 	padding: 1em;
+	margin-bottom: 1em;
 }
 
 @keyframes fade-in {
