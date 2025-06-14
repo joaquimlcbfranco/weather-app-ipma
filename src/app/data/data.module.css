@@ -234,3 +234,72 @@
 		transform: rotate(360deg);
 	}
 }
+
+@media (max-width: 768px) and (orientation: portrait) {
+	.dataWrapper {
+		margin: 1em;
+		height: 90vh;
+	}
+
+	.dataSection {
+		flex-direction: column;
+		justify-content: center;
+		padding: 0;
+	}
+
+	.leftData {
+		text-align: center;
+	}
+
+	.leftData .weatherDescription {
+		font-size: 1.5rem;
+		margin-bottom: 0.5em;
+	}
+
+	.rightData {
+		display: flex;
+		gap: 1em;
+	}
+
+	.rightData p {
+		font-size: 2rem;
+	}
+
+	.rightData .square > p > span:first-child {
+		top: -1em;
+	}
+
+	.bottomData .cards {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+	.dataWrapper {
+		margin: 1em;
+		height: 90vh;
+	}
+
+	.topInfo {
+		flex: 1;
+	}
+
+	.leftData .weatherDescription {
+		font-size: 1.5rem;
+		margin-bottom: 0.5em;
+	}
+
+	.rightData {
+		display: flex;
+		gap: 1em;
+	}
+
+	.rightData p {
+		font-size: 2rem;
+	}
+
+	.rightData .square > p > span:first-child {
+		top: -1em;
+	}
+}
