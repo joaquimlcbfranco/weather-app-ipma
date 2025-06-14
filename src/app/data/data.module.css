@@ -12,6 +12,12 @@
 	animation: rotation 1s linear infinite;
 }
 
+.statusMessage {
+	color: white;
+	font-family: "Fira Sans", "Nunito", sans-serif, system-ui;
+	margin-bottom: auto;
+}
+
 .dataWrapper {
 	height: 70%;
 	width: 100%;
