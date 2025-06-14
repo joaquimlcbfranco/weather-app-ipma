@@ -76,22 +76,21 @@ body {
   align-items: center;
   height: 100vh;
   width: 100%;
-  background-image: url(../assets/background.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   position: relative;
   font-family: "Nunito", "Fira Sans", var(--default-fonts);
+  overflow: hidden;
 }
-
-body::after {
-  content: "";
-  height: 100%;
+body > img {
   width: 100%;
+  height: 100%;
+  position: absolute;
   top: 0;
   left: 0;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  position: absolute;
+  z-index: 0;
+  filter: blur(10px);
+  transform: scale(1.05);
   z-index: -1;
 }
+
+
+
