@@ -32,23 +32,30 @@ const Data = () => {
 			const fetchedData = await fetch(
 				"https://api.ipma.pt/open-data/distrits-islands.json"
 			);
+			if (!fetchedData.ok) {
+				throw new Error(
+					`Erro ao obter a lista de cidades: ${fetchedData.status}`
+				);
+			}
 			const json = await fetchedData.json();
-			setCityName(
-				json.data.filter(
-					(obj) =>
-						removeAccents(obj.local.toLowerCase()) ===
-						removeAccents(text.toLowerCase())
-				)[0].local
+
+			const match = json.data.find(
+				(obj) =>
+					removeAccents(obj.local.toLowerCase()) ===
+					removeAccents(text.trim().toLowerCase())
 			);
-			setCityId(
-				json.data.filter(
-					(obj) =>
-						removeAccents(obj.local.toLowerCase()) ===
-						removeAccents(text.toLowerCase())
-				)[0].globalIdLocal
-			);
+
+			if (!match) {
+				setError("Cidade não encontrada");
+				setLoading(false);
+				return;
+			}
+
+			setCityName(match.local);
+			setCityId(match.globalIdLocal);
 		} catch (err) {
-			setError("Unexpected error. Status: ", err);
+			setError(`Unexpected network error. Status: ${err}`);
+			setLoading(false);
 		}
 
 		setText("");
@@ -61,18 +68,18 @@ const Data = () => {
 				const faroData = await fetch(
 					`https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/${cityId}.json`
 				);
-				if (faroData.response >= 400) {
+				if (!faroData.ok) {
 					setError(
-						"There has been an error while getting the requested data. Status: ",
-						faroData.response
+						`Erro ao obter dados da cidade: ${faroData.status}`
 					);
 				}
 				const json = await faroData.json();
 				setData(json.data);
 			} catch (err) {
-				setError("Unexpected error. Status: ", err);
+				setError(`Unexpected network error. Status: ${err}`);
 			} finally {
 				setLoading(false);
+				setError(null);
 			}
 		};
 
@@ -81,34 +88,130 @@ const Data = () => {
 
 	// Get weather description
 	useEffect(() => {
-		const fetchDescription = async () => {
-			try {
-				const fetchData = await fetch(
-					"https://api.ipma.pt/open-data/weather-type-classe.json"
-				);
-				const json = await fetchData.json();
-				setDescription(
-					json.data.filter(
-						(obj) => obj.idWeatherType === data[0].idWeatherType
-					)[0].descWeatherTypePT
-				);
-			} catch (err) {
-				setError("Unexpected error. Status: ", err);
-			}
-		};
+		if (data.length !== 0) {
+			const fetchDescription = async () => {
+				try {
+					const fetchData = await fetch(
+						"https://api.ipma.pt/open-data/weather-type-classe.json"
+					);
+					if (!fetchData.ok) {
+						setError(
+							`Erro ao obter classificações meteorológicas: ${fetchData.status}`
+						);
+					}
+					const json = await fetchData.json();
+					setDescription(
+						json.data.filter(
+							(obj) => obj.idWeatherType === data[0].idWeatherType
+						)[0].descWeatherTypePT
+					);
+				} catch (err) {
+					setError(`Unexpected network error. Status: ${err}`);
+				}
+			};
 
-		fetchDescription();
+			fetchDescription();
+		}
 	}, [data]);
-
-	if (error) {
-		// return <ErrorPage />
-	}
 
 	// Render a loading spinner inside the data wrapper when loading is true
 	if (loading) {
 		return (
 			<div className={styles.dataWrapper}>
 				<span className={styles.loader}></span>
+			</div>
+		);
+	}
+
+	if (error) {
+		return (
+			<div className={styles.dataWrapper}>
+				<div className={styles.topInfo}>
+					<Link href="/">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							height="24px"
+							viewBox="0 -960 960 960"
+							width="24px"
+							fill="#FFFFFF"
+						>
+							<path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
+						</svg>
+					</Link>
+					<form
+						className={styles.weatherForm}
+						onSubmit={handleFormSubmit}
+					>
+						<div className={styles.formRow}>
+							<input
+								id="city"
+								placeholder="Cidade"
+								type="text"
+								value={text}
+								onChange={handleInputChange}
+							></input>
+							<button type="submit" className={styles.submitForm}>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									height="20px"
+									viewBox="0 -960 960 960"
+									width="20px"
+									fill="rgba(255, 255, 255, 1)"
+								>
+									<path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+								</svg>
+							</button>
+						</div>
+					</form>
+				</div>
+				<h1 className={styles.statusMessage}>{error}</h1>
+			</div>
+		);
+	}
+
+	// Double check if data variable got API info
+	if (!data || data.length === 0) {
+		return (
+			<div className={styles.dataWrapper}>
+				<div className={styles.topInfo}>
+					<Link href="/">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							height="24px"
+							viewBox="0 -960 960 960"
+							width="24px"
+							fill="#FFFFFF"
+						>
+							<path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
+						</svg>
+					</Link>
+					<form
+						className={styles.weatherForm}
+						onSubmit={handleFormSubmit}
+					>
+						<div className={styles.formRow}>
+							<input
+								id="city"
+								placeholder="Cidade"
+								type="text"
+								value={text}
+								onChange={handleInputChange}
+							></input>
+							<button type="submit" className={styles.submitForm}>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									height="20px"
+									viewBox="0 -960 960 960"
+									width="20px"
+									fill="rgba(255, 255, 255, 1)"
+								>
+									<path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+								</svg>
+							</button>
+						</div>
+					</form>
+				</div>
+				<h1>Não há dados para esta localização</h1>
 			</div>
 		);
 	}
