@@ -10,8 +10,8 @@ import pt from "date-fns/locale/pt";
 const Data = () => {
 	const locale = pt;
 	const [text, setText] = useState("");
-	const [cityId, setCityId] = useState(1080500);
-	const [cityName, setCityName] = useState("Faro");
+	const [cityId, setCityId] = useState(1070500);
+	const [cityName, setCityName] = useState("Évora");
 	const [description, setDescription] = useState("");
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -61,19 +61,19 @@ const Data = () => {
 		setText("");
 	};
 
-	// Get initial data for the city of Faro
+	// Get initial data for the city of Évora
 	useEffect(() => {
 		const fetchInitialData = async () => {
 			try {
-				const faroData = await fetch(
+				const evoraData = await fetch(
 					`https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/${cityId}.json`
 				);
-				if (!faroData.ok) {
+				if (!evoraData.ok) {
 					setError(
-						`Erro ao obter dados da cidade: ${faroData.status}`
+						`Erro ao obter dados da cidade: ${evoraData.status}`
 					);
 				}
-				const json = await faroData.json();
+				const json = await evoraData.json();
 				setData(json.data);
 			} catch (err) {
 				setError(`Unexpected network error. Status: ${err}`);
